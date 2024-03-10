@@ -157,25 +157,31 @@ export const searchColeccionesId = async ({ setColeccion }) => {
       .catch(error => console.error('Error:', error));
   };
   
-
   export const searchColeccion = async (text, setColeccion) => {
-    let data;
-    let page = 1
-    let type="v1"
+    let data = [];
+    const type = "v1";
+    const apiKey = 'vOV8UbIS6FxoVnHMiHBiu3FJlx1PsUXTesSuS3LG8weefCDW11ymoWOl';
+    const totalPages = 4; // Número de páginas a obtener
+
     try {
-        const response = await fetch(`https://api.pexels.com/${type}/search?query=${text}&page=${page}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'vOV8UbIS6FxoVnHMiHBiu3FJlx1PsUXTesSuS3LG8weefCDW11ymoWOl',
+        for (let page = 1; page <= totalPages; page++) {
+            const response = await fetch(`https://api.pexels.com/${type}/search?query=${text}&page=${page}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': apiKey,
+                }
+            });
+
+            if (response.ok) {
+                const responseData = await response.json();
+                data = [...data, ...responseData.photos];
+            } else {
+                console.error('Error al recuperar datos de la API');
+                return;
             }
-        });
-        if (response.ok) {
-             data = await response.json();
-             setColeccion(data.photos);
-            return
-        } else {
-            console.error('Error al recuperar datos de la API');
         }
+
+        setColeccion(data);
     } catch (error) {
         console.error('Error en la solicitud:', error);
     }

@@ -51,11 +51,8 @@ const Explorar = () => {
       await searchColeccion("oldSchool", setOldSchool);
       await searchColeccion("vintage", setVintage);
       await searchColeccion("roma", setRoma);
-      await searchColeccion("father", setFather);
       await searchColeccion("mother", setMother);
       await searchColeccion("child", setChild);
-      await searchColeccion("toys", setToys);
-      await searchColeccion("racers", setRacers);
     };
     fetchData();
   }, []);
