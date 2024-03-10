@@ -1,49 +1,80 @@
 export const search = async (text, setImagenes) => {
-    let data;
-    let page = 1
-    let type="v1"
-    try {
-        const response = await fetch(`https://api.pexels.com/${type}/search?query=${text}&page=${page}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'vOV8UbIS6FxoVnHMiHBiu3FJlx1PsUXTesSuS3LG8weefCDW11ymoWOl',
-            }
-        });
-        if (response.ok) {
-             data = await response.json();
-            setImagenes(data.photos);
-            console.log({data})
-            return
-        } else {
-            console.error('Error al recuperar datos de la API');
-        }
-    } catch (error) {
-        console.error('Error en la solicitud:', error);
-    }
+  let data = [];
+  const type = "v1";
+  const apiKey = 'vOV8UbIS6FxoVnHMiHBiu3FJlx1PsUXTesSuS3LG8weefCDW11ymoWOl';
+
+  try {
+      let page = 1;
+      let totalPages = 15;
+
+      // Realizar solicitudes hasta obtener todos los datos de todas las páginas
+      while (page <= totalPages) {
+          const response = await fetch(`https://api.pexels.com/${type}/search?query=${text}&page=${page}`, {
+              method: 'GET',
+              headers: {
+                  'Authorization': apiKey,
+              }
+          });
+
+          if (response.ok) {
+              const responseData = await response.json();
+              data = data.concat(responseData.photos);
+              // Actualizar el número total de páginas si no lo hemos hecho aún
+              if (totalPages === 1) {
+                  totalPages = Math.ceil(responseData.total_results / responseData.per_page);
+              }
+          } else {
+              console.error('Error al recuperar datos de la API');
+              break; // Salir del bucle si hay un error en la solicitud
+          }
+          page++; // Moverse a la siguiente página para la próxima iteración
+      }
+
+      setImagenes(data);
+  } catch (error) {
+      console.error('Error en la solicitud:', error);
+  }
 }
 
+
 export const searchVideo = async (text, setVideos) => {
-    let data;
-    let page = 1
-    let type="videos"
-    try {
-        const response = await fetch(`https://api.pexels.com/${type}/search?query=${text}&page=${page}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'vOV8UbIS6FxoVnHMiHBiu3FJlx1PsUXTesSuS3LG8weefCDW11ymoWOl',
-            }
-        });
-        if (response.ok) {
-             data = await response.json();
-             setVideos(data.videos);
-            return
-        } else {
-            console.error('Error al recuperar datos de la API');
-        }
-    } catch (error) {
-        console.error('Error en la solicitud:', error);
-    }
+  let data = [];
+  const type = "videos";
+  const apiKey = 'vOV8UbIS6FxoVnHMiHBiu3FJlx1PsUXTesSuS3LG8weefCDW11ymoWOl';
+
+  try {
+      let page = 1;
+      let totalPages = 9;
+
+      // Realizar solicitudes hasta obtener todos los datos de todas las páginas
+      while (page <= totalPages) {
+          const response = await fetch(`https://api.pexels.com/${type}/search?query=${text}&page=${page}`, {
+              method: 'GET',
+              headers: {
+                  'Authorization': apiKey,
+              }
+          });
+
+          if (response.ok) {
+              const responseData = await response.json();
+              data = data.concat(responseData.videos);
+              // Actualizar el número total de páginas si no lo hemos hecho aún
+              if (totalPages === 10) {
+                  totalPages = Math.ceil(responseData.total_results / responseData.per_page);
+              }
+          } else {
+              console.error('Error al recuperar datos de la API');
+              break; // Salir del bucle si hay un error en la solicitud
+          }
+          page++; // Moverse a la siguiente página para la próxima iteración
+      }
+
+      setVideos(data);
+  } catch (error) {
+      console.error('Error en la solicitud:', error);
+  }
 }
+
 
 export const searchFotografo = async ({ setFotografo }) => {
     let data;

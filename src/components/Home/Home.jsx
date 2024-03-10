@@ -14,7 +14,7 @@ const Home = () => {
     const [fotografo, setFotografo] = useState()
 
     useEffect(()=>{
-        search( "gatos", setImagenes)
+        search( "cats", setImagenes)
     },[])
 
     useEffect(()=>{
