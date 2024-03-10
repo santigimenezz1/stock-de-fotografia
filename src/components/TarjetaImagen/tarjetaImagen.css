@@ -1,0 +1,30 @@
+
+.tarjetaImagen{
+    height: min-content;
+    width: 250px;
+    position: relative;
+
+}
+.tarjetaImagen img{
+    width: 95%;
+    max-height: 100%;  
+}
+.botonDescarga{
+    display: none;
+}
+.tarjetaImagen:hover{
+    .botonDescarga{
+        display: flex;
+    }
+    filter: brightness(0.6);
+    cursor: pointer;  
+}
+.container__botonDescarga{
+    z-index: 2;
+}
+.container__botonDescarga{
+    display: flex;
+    font-size: 10px; 
+}
+
+

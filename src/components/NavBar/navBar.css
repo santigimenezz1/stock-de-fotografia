@@ -1,0 +1,33 @@
+.nav{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    gap: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding-top: 20px;
+}
+.nav__image{
+    display: flex;
+    gap: 10px;
+    justify-content: start;
+    align-items: start;
+}
+.nav__input{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.nav__image img{
+    width: 65px;
+    cursor: pointer;
+}
+.logo__perfil{
+    width: 70px;
+}
+
+
+ 

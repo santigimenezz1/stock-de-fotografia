@@ -1,0 +1,23 @@
+.container__tarjetasExplorar{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 70px;
+}
+.tarjetas__explorar{
+    display: flex;
+    gap: 10px;
+}
+footer{
+    width: 100%;
+    height: 90px;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+.container__tarjetas__flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
