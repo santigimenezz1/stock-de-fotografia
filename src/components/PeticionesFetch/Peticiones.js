@@ -4,9 +4,9 @@ export const search = async (text, setImagenes) => {
   const apiKey = 'vOV8UbIS6FxoVnHMiHBiu3FJlx1PsUXTesSuS3LG8weefCDW11ymoWOl';
 
   try {
-      let page = 1;
-      let totalPages = 15;
 
+      let page = 1;
+      let totalPages = 10;
       // Realizar solicitudes hasta obtener todos los datos de todas las páginas
       while (page <= totalPages) {
           const response = await fetch(`https://api.pexels.com/${type}/search?query=${text}&page=${page}`, {
@@ -18,23 +18,20 @@ export const search = async (text, setImagenes) => {
 
           if (response.ok) {
               const responseData = await response.json();
-              data = data.concat(responseData.photos);
-              // Actualizar el número total de páginas si no lo hemos hecho aún
-              if (totalPages === 1) {
-                  totalPages = Math.ceil(responseData.total_results / responseData.per_page);
-              }
+              data = data.concat(responseData.photos);              
           } else {
               console.error('Error al recuperar datos de la API');
               break; // Salir del bucle si hay un error en la solicitud
           }
           page++; // Moverse a la siguiente página para la próxima iteración
       }
-
       setImagenes(data);
+
   } catch (error) {
       console.error('Error en la solicitud:', error);
   }
-}
+}  
+
 
 
 export const searchVideo = async (text, setVideos) => {
@@ -58,10 +55,6 @@ export const searchVideo = async (text, setVideos) => {
           if (response.ok) {
               const responseData = await response.json();
               data = data.concat(responseData.videos);
-              // Actualizar el número total de páginas si no lo hemos hecho aún
-              if (totalPages === 10) {
-                  totalPages = Math.ceil(responseData.total_results / responseData.per_page);
-              }
           } else {
               console.error('Error al recuperar datos de la API');
               break; // Salir del bucle si hay un error en la solicitud
