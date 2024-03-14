@@ -23,9 +23,7 @@ const NavBar = ( {setImagenes, handleDatosCargados, typeSelector, videos, setVid
             <div className='nav__input'>
             <InputSearch setImagenes={setImagenes}  typeSelector={typeSelector} videos={videos} setVideos={setVideos} />
             </div>
-            <Link to={'/perfil'}>
-            <AccountCircleIcon fontSize='large' style={{cursor:"pointer"}} />
-            </Link>
+           
         </nav>
         <Outlet />
 
