@@ -6,7 +6,7 @@ export const search = async (text, setImagenes) => {
   try {
 
       let page = 1;
-      let totalPages = 10;
+      let totalPages = 4;
       // Realizar solicitudes hasta obtener todos los datos de todas las páginas
       while (page <= totalPages) {
           const response = await fetch(`https://api.pexels.com/${type}/search?query=${text}&page=${page}`, {
@@ -41,7 +41,7 @@ export const searchVideo = async (text, setVideos) => {
 
   try {
       let page = 1;
-      let totalPages = 9;
+      let totalPages = 2;
 
       // Realizar solicitudes hasta obtener todos los datos de todas las páginas
       while (page <= totalPages) {
@@ -154,7 +154,7 @@ export const searchColeccionesId = async ({ setColeccion }) => {
     let data = [];
     const type = "v1";
     const apiKey = 'vOV8UbIS6FxoVnHMiHBiu3FJlx1PsUXTesSuS3LG8weefCDW11ymoWOl';
-    const totalPages = 4; // Número de páginas a obtener
+    const totalPages = 2; // Número de páginas a obtener
 
     try {
         for (let page = 1; page <= totalPages; page++) {
